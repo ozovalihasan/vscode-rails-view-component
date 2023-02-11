@@ -11,7 +11,6 @@ import {
   RelativePattern
 } from "vscode";
 
-const LINE_PATTERN = / render (?:[a-zA-Z:]+)?$/;
 const NAME_PATTERN = /class (.*?) < .*Component.*/;
 const ARGS_PATTERN = /def initialize\(([^)]+)\)?/m;
 const COMPONENT_GLOB = 'app/components/**/*_component.rb';
@@ -57,7 +56,7 @@ const buildSnippetValue = (name: string, args?: string): string => {
       return `${argName}: \${${pos}:${argValue || 'value'}}`;
     }).
     join(', ');
-  return `${snippet}(${argsSnippet})`;
+  return `<%= render ${snippet}(${argsSnippet}) %>`;
 };
 
 
@@ -87,10 +86,6 @@ export default class CompletionProvider implements CompletionItemProvider {
         new Position(position.line, position.character)
       )
     );
-    const matches = line.match(LINE_PATTERN);
-    if (!matches) {
-      return;
-    }
 
     const components = await this.findComponents();
     return components.map(({ name, args }) => {
