@@ -1,9 +1,9 @@
 {
-  "name": "rails-view-component",
-  "displayName": "Rails ViewComponent",
+  "name": "rails-test",
+  "displayName": "Rails Test",
   "description": "Completion provider for Rails ViewComponent",
   "version": "0.1.0",
-  "publisher": "aki77",
+  "publisher": "hasanozovali",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.71.0"
@@ -30,6 +30,32 @@
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
+  },
+  "contributes": {
+    "commands": [
+        {
+            "command": "rails-test.rails-test",
+            "title": "Quick Open Selection"
+        },
+        {
+            "command": "rails-test.view-component-ruby",
+            "title": "Open view component ruby file"
+        }
+    ],
+    "keybindings": [
+        {
+            "command": "rails-test.rails-test",
+            "key": "ctrl+p",
+            "mac": "cmd+p",
+            "when": "editorTextFocus"
+        },
+        {
+            "command": "rails-test.view-component-ruby",
+            "key": "ctrl+[",
+            "mac": "cmd+[",
+            "when": "editorTextFocus"
+        }
+    ]
   },
   "devDependencies": {
     "@types/vscode": "^1.71.0",
