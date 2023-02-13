@@ -5,12 +5,18 @@ export function activate() {
         const editor = window.activeTextEditor;
 
         if (editor) {
-            let selected_text = editor.document.getText(editor.selection) 
-            selected_text = selected_text.replace("::", "/");
+            const cursorPosition = editor.selection.active
+            const current_line_text = editor.document.lineAt(cursorPosition.line).text
+            let current_line_match = current_line_text.match(/render\s*(.*Component)/)
+            let selected_text = ""
 
-            if (selected_text.toLowerCase().includes("component")){
-                selected_text = selected_text.concat(".html.erb")
-            }            
+            if (current_line_match !== null) {
+                selected_text = current_line_match[1].concat(".html.erb")
+            } else {
+                selected_text = editor.document.getText(editor.selection)
+            }
+
+            selected_text = selected_text.replace("::", "/");
 
             if (selected_text.toLowerCase().includes("\n")){
                 selected_text = ""
@@ -27,13 +33,18 @@ export function activate() {
         const editor = window.activeTextEditor;
 
         if (editor) {
-            let selected_text = editor.document.getText(editor.selection) 
-            selected_text = selected_text.replace("::", "/");
+            const cursorPosition = editor.selection.active
+            const current_line_text = editor.document.lineAt(cursorPosition.line).text
+            let current_line_match = current_line_text.match(/render\s*(.*Component)/)
+            let selected_text = ""
 
-            if (selected_text.toLowerCase().includes("component")){
-                selected_text = selected_text.concat(".rb")
+            if (current_line_match !== null) {
+                selected_text = current_line_match[1].concat(".rb")
+            } else {
+                selected_text = editor.document.getText(editor.selection)
             }
 
+            selected_text = selected_text.replace("::", "/");
 
             if (selected_text.toLowerCase().includes("\n")){
                 selected_text = ""
