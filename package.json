@@ -40,20 +40,42 @@
         {
             "command": "rails-test.view-component-ruby",
             "title": "Open view component ruby file"
+        },
+        {
+            "command": "rails-test.change-to-rb-file",
+            "title": "Open .rb file of the component .html.erb or _spec.rb file"
+        },
+        {
+            "command": "rails-test.change-to-rspec-file",
+            "title": "Open _spec.rb file of the component .html.erb or .rb file"
+        },
+        {
+            "command": "rails-test.change-to-html-erb-file",
+            "title": "Open .html.erb file of the component .rb or _spec.rb file"
         }
     ],
     "keybindings": [
         {
             "command": "rails-test.rails-test",
             "key": "ctrl+p",
-            "mac": "cmd+p",
-            "when": "editorTextFocus"
+            "mac": "cmd+p"
         },
         {
             "command": "rails-test.view-component-ruby",
             "key": "ctrl+[",
-            "mac": "cmd+[",
-            "when": "editorTextFocus"
+            "mac": "cmd+["
+        },
+        {
+            "command": "rails-test.change-to-rb-file",
+            "key": "alt+i"
+        },
+        {
+            "command": "rails-test.change-to-rspec-file",
+            "key": "alt+p"
+        },
+        {
+            "command": "rails-test.change-to-html-erb-file",
+            "key": "alt+o"
         }
     ]
   },
