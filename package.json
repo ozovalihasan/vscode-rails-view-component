@@ -19,7 +19,8 @@
     "url": "https://github.com/aki77/vscode-rails-view-component/issues"
   },
   "activationEvents": [
-    "workspaceContains:app/components/**/*_component.rb"
+    "workspaceContains:app/components/**/*_component.rb",
+    "workspaceContains:app/views/**/*"
   ],
   "license": "MIT",
   "main": "./out/extension.js",
