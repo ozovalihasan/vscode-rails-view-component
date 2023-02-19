@@ -40,9 +40,11 @@ import {
   };
   
   const buildSnippetValue = (name: string, args?: string): string => {
+    const renderSnippet = (str: string) => `<%= render ${str} %>`;
+
     const snippet = `${name}.new`;
     if (!args) {
-      return snippet;
+      return renderSnippet(snippet);
     }
   
     const argsSnippet = args.split(',') 
@@ -57,7 +59,7 @@ import {
                             })
                             .join(', ');
                             
-    return `<%= render ${snippet}(${argsSnippet}) %>`;
+    return renderSnippet(`${snippet}(${argsSnippet})`);
   };
   
   
