@@ -13,7 +13,7 @@ import {
   
   const NAME_PATTERN = /class (.*?) < .*Component.*/;
   const ARGS_PATTERN = /def initialize\(([^)]+)\)?/m;
-  const COMPONENT_GLOB = 'app/components/**/*_component.rb';
+  const COMPONENT_GLOB = 'app/components/**/*component.rb';
   
   type Component = {
     name: string;
