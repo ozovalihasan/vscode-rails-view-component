@@ -38,16 +38,20 @@ import {
   
     return (await Promise.all(promises)).filter((c): c is NonNullable<typeof c> => !!c);
   };
-  
-  const buildSnippetValue = (name: string, args?: string): string => {
-    const renderSnippet = (str: string) => `<%= render ${str} %>`;
 
-    const snippet = `${name}.new`;
-    if (!args) {
-      return renderSnippet(snippet);
-    }
+  const toSnakeCase = (str: string) => str.match(/[A-Z][a-z]+/g)?.map(s => s.toLowerCase()).join("_");
   
-    const argsSnippet = args.split(',') 
+  const componentToFileName = (componentName: string) => {
+    return componentName.replace("::Component", "").split("::").map((part: string) => toSnakeCase(part)).join("/")
+  };
+
+  const buildSnippetValue = (componentName: string, args?: string): string => {
+    const renderSnippet = (str: string) => `<%= render ${str} \$0%>`;
+
+    let argsSnippet = ""
+    if (args) {
+      argsSnippet = [`"${componentToFileName(componentName)}"`].concat(
+                            args.split(',') 
                             .map((arg, i) => {
                                 const [argName, argValue] = arg.split(':').map((s) => s.trim());
                                 const pos = i + 1;
@@ -57,9 +61,10 @@ import {
                         
                                 return `${argName}: \${${pos}:${argValue || argName}}`;
                             })
-                            .join(', ');
-                            
-    return renderSnippet(`${snippet}(${argsSnippet})`);
+                          ).join(', ');
+    }
+    
+    return renderSnippet(`component(${argsSnippet})`);
   };
   
   
